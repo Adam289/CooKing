@@ -53,7 +53,9 @@ android {
         flavor -> flavor.manifestPlaceholders = [APK_CHANNEL_VALUE: name]
     }
 }
-
+repositories {
+    maven { url "https://jitpack.io" }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -76,4 +78,5 @@ dependencies {
     //TODO 需升级新版本了
     //compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    compile 'com.github.hackware1993:MagicIndicator:1.5.0'
 }
