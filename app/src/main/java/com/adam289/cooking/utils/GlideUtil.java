@@ -1,20 +1,20 @@
-package com.example.administrator.cookman.utils;
+package com.adam289.cooking.utils;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
+import com.adam289.cooking.MyApplication;
+import com.adam289.cooking.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.example.administrator.cookman.CookManApplication;
-import com.example.administrator.cookman.R;
 
-import java.io.File;
 
 /**
- * Created by PeOS on 2016/9/1 0001.
+ * Desc
+ * Created by Adam289 on 2017/3/27.
  */
 public class GlideUtil {
 
@@ -87,7 +87,7 @@ public class GlideUtil {
     }
 
     public void downloadImage(String url, Target target) {
-        Glide.with(CookManApplication.getContext())
+        Glide.with(MyApplication.getContext())
                 .load(url)
                 .asBitmap()
                 .diskCacheStrategy(diskCache)

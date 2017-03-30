@@ -1,4 +1,4 @@
-package com.example.administrator.cookman.ui.adapter;
+package com.adam289.cooking.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

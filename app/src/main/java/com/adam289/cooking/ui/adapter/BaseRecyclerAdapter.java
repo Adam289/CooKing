@@ -1,4 +1,4 @@
-package com.example.administrator.cookman.ui.adapter;
+package com.adam289.cooking.ui.adapter;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 
-import com.example.administrator.cookman.utils.DensityUtil;
+import com.lcodecore.tkrefreshlayout.utils.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +79,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         if (animationsLocked) return;
         if (position > lastAnimatedPosition) {
             lastAnimatedPosition = position;
-            view.setTranslationY(DensityUtil.dip2px(view.getContext(), 100));//(position+1)*50f
+            view.setTranslationY(DensityUtil.dp2px(view.getContext(), 100));//(position+1)*50f
             view.setAlpha(0.f);
             view.animate()
                     .translationY(0).alpha(1.f)
