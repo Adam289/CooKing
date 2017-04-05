@@ -10,7 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.adam289.cooking.R;
+import com.adam289.cooking.model.CustomCategoryManager;
+import com.adam289.cooking.model.entity.tb_cook.TB_CustomCategory;
 import com.adam289.cooking.presenter.Presenter;
+import com.adam289.cooking.ui.adapter.MainPageViewPageAdapter;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -21,7 +24,6 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,13 +32,14 @@ import butterknife.BindView;
  * Desc 主页面Fragment
  * Created by Adam289 on 2017/3/21.
  */
-public class MainFragment extends BaseFragment {
+public class MainFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
     @BindView(R.id.magic_indicator)
     MagicIndicator magicIndicator;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
     Context mContext ;
-    private List<String> mTitleDataList;
+    private List<TB_CustomCategory> mTitleDataList;
+    private MainPageViewPageAdapter mainPageViewPageAdapter;
 
     @Override
     protected Presenter getPresenter() {
@@ -45,15 +48,14 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(getLayoutId(), container, false);
+        magicIndicator = (MagicIndicator) view.findViewById(R.id.magic_indicator);
+        mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
         mContext = getActivity();
         initIndicator();
     }
-
     private void initIndicator() {
-        mTitleDataList = new ArrayList<>();
-        mTitleDataList.add("小吃");
-        mTitleDataList.add("湘菜");
-        mTitleDataList.add("粤菜");
+        mTitleDataList = CustomCategoryManager.getInstance().getDatas();
         CommonNavigator commonNavigator = new CommonNavigator(mContext);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
 
@@ -67,7 +69,7 @@ public class MainFragment extends BaseFragment {
                 ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
                 colorTransitionPagerTitleView.setNormalColor(Color.GRAY);
                 colorTransitionPagerTitleView.setSelectedColor(Color.BLACK);
-                colorTransitionPagerTitleView.setText(mTitleDataList.get(index));
+                colorTransitionPagerTitleView.setText(mTitleDataList.get(index).getName());
                 colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -86,10 +88,29 @@ public class MainFragment extends BaseFragment {
         });
         magicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(magicIndicator, mViewPager);
+        mainPageViewPageAdapter = new MainPageViewPageAdapter(getFragmentManager(), mTitleDataList);
+        mViewPager.addOnPageChangeListener(this);
+
+        mViewPager.setAdapter(mainPageViewPageAdapter);
     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_main;
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }

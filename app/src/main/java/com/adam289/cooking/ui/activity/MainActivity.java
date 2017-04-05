@@ -1,5 +1,7 @@
 package com.adam289.cooking.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -70,4 +72,8 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    public static void startActivity(Context context){
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
 }
